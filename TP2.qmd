@@ -93,7 +93,7 @@ ggplotly(g)
 
 ```
 
-#Q6
+#Q6 / Q7
 
  la regression linéaire simple de mass (variable à expliquer) en fonction de height (variable
 explicative)
@@ -104,6 +104,64 @@ reg_q6 <- lm(data = starwars,  mass~height )
 
 summary(reg_q6)
 ```
+
+
+```{r}
+cor(starwars$mass,starwars$height)
+
+```
+
+#Q8 
+observation aberrante a été retirée
+
+```{r}
+starwars_hors_VA <- starwars %>% filter( mass != max(mass))
+
+ggplot(data = starwars_hors_VA,
+       mapping = aes( x= height, y=mass))+
+  geom_point()
+
+
+
+
+```
+
+```{r}
+reg_q8 <- lm(data  =starwars_hors_VA, mass~height)
+summary(reg_q8)
+```
+#Q9
+```{r}
+
+cor(starwars_hors_VA$mass, starwars_hors_VA$height)
+
+```
+
+#Q10
+```{r}
+ggplot(data = starwars_hors_VA,
+       mapping = aes( x= height, y=mass, color= species))+
+  geom_point()
+  
+  
+  
+  
+```
+#Q11
+
+```{r}
+ggplot(starwars_hors_VA, aes(x = height, y=mass, color =birth_year, shape = sex))+
+  geom_point()
+```
+
+#Q12
+
+```{r}
+
+```
+
+
+
 
 
 
