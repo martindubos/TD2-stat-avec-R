@@ -153,12 +153,31 @@ ggplot(data = starwars_hors_VA,
 ggplot(starwars_hors_VA, aes(x = height, y=mass, color =birth_year, shape = sex))+
   geom_point()
 ```
+ package R pour palettes de couleur : RColorBrewer
+
+```{r}
+ggplot(starwars_hors_VA, aes(x = height, y=mass, color =birth_year, shape = sex))+
+  geom_point()+
+  scale_color_manual(values = c("male"="blue", "female"="pink","none"="grey"))
+```
+
 
 #Q12
 
 ```{r}
+g <- ggplot( data = starwars_hors_VA,
+             mapping = aes(x = height, y = mass, color = sex))+
+  geom_point()+
+  theme_light()+
+  labs(title = "pas beacoup de femmmes dans starwars",
+       subtitle = "croisement des variables de poids et de taille selon le sexe",
+       x = "taille",
+       y = "poids",
+       source =" source : starwars dplyr")
+ggplotly(g)
 
 ```
+
 
 
 
