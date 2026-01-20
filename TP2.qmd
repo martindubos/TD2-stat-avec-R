@@ -55,6 +55,7 @@ ggplot(data = mpg,
 # ctrl + alt + I
 # Alt Gr + 2 
 #ctrl + maj + M
+#alt + - 
 
 data("starwars")
 
@@ -203,8 +204,81 @@ Education <- factor(Education, levels = c("0","1","2"), labels = c("Low","Medium
 ##Q3
 
 ```{r}
-data <- tibble
+data <- tibble(Salary,Neuroticism,Education)
 ```
+
+##Q4
+
+représentation de la variable Salary en fonction de Neuroticism sous la forme d’un nuage de points
+
+```{r}
+ggplot(data = data, 
+       mapping = aes(x= Neuroticism, y=Salary))+
+  geom_point()+
+  geom_smooth(method = "lm")
+
+data %>% 
+  ggplot(aes(x = Neuroticism, y= Salary))+
+    geom_point()+
+    geom_smooth(method = "lm")
+```
+
+
+
+```{r}
+cor(data$Salary,data$Neuroticism)
+```
+
+##Q5
+
+```{r}
+data %>% 
+  ggplot(aes(Neuroticism,Salary,color = Education))+
+  geom_point()+
+  geom_smooth(method="lm")
+```
+
+
+# EXERCICE 3 
+
+##Q1
+
+```{r}
+data("economics")
+data("presidential")
+
+str(economics)
+str(presidential)
+
+```
+
+##Q2
+
+```{r}
+economics <- economics %>% 
+  arrange(desc(date))
+economics
+```
+
+##Q4
+```{r}
+economics <- economics %>% 
+  mutate( annee = year(date))
+  
+economics %>% 
+  group_by(annee) %>% 
+  summarise(nb_mois = n()) %>% 
+  filter(nb_mois !=12)
+```
+
+```{r}
+economics %>% 
+  group_by(year(date), month(date)) %>% 
+  summarise(n_mois = n()) %>% 
+  filter(n_mois > 1 )
+```
+
+
 
 
 
