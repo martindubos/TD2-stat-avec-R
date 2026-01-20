@@ -1,0 +1,113 @@
+---
+title: "TP2"
+format: html
+editor: visual
+---
+
+```{r, message=FALSE}
+ library(dplyr)
+
+#graphique 
+library(ggplot2)
+install.packages("plotly")
+library(plotly)
+
+#format date 
+library(lubridate)
+
+```
+
+premier graphique à partir de mpg
+
+```{r}
+
+mpg <- mpg
+
+str(mpg)
+```
+
+```{r}
+ggplot(data = mpg,
+        mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  labs(title = "consommation de carburant vs volume total des cylindres moteur",
+       x = "volume total de cylindres (L)",
+       y = "Autonomie autoroute (mpg) ")
+```
+
+```{r}
+
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy, colour = class)) +
+  geom_point() + 
+  facet_wrap(~class) +
+  theme_minimal()+
+  labs(title = "comparaison de la conso de carburant selon les types de voiture")
+    
+
+```
+
+# Exercice 1
+
+## question 1
+
+```{r}
+# ctrl + alt + I
+# Alt Gr + 2 
+#ctrl + maj + M
+
+data("starwars")
+
+str(starwars)
+
+
+```
+#Q2
+```{r}
+starwars <- starwars %>% 
+  filter(!is.na(height), is.na(mass) == FALSE)
+
+```
+#Q3
+```{r}
+
+plot(starwars$height, starwars$mass)
+
+```
+#Q4
+
+```{r}
+ggplot(data = starwars,
+       mapping = aes( x = height, y = mass)) +
+  geom_point()
+```
+
+#Q5
+
+```{r}
+g <- ggplot(data = starwars,
+       mapping = aes( x = height, y = mass)) +
+  geom_point()
+
+ggplotly(g)
+
+```
+
+#Q6
+
+ la regression linéaire simple de mass (variable à expliquer) en fonction de height (variable
+explicative)
+*commment evolue Y quand X change ? * 
+
+```{r}
+reg_q6 <- lm(data = starwars,  mass~height )
+
+summary(reg_q6)
+```
+
+
+
+
+
+
+
