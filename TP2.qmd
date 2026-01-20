@@ -180,6 +180,32 @@ ggplotly(g)
 
 
 
+# Exercice 2
+
+##Q1
+
+```{r}
+set.seed(2026)
+
+Education <- rbinom(1000,2,0.5)
+
+Y1 <- rnorm(1000, mean = 0, sd=1)
+Y2 <- rnorm(1000)
+
+
+Neuroticism <- Y1 + Education
+
+Salary <- 2*Education + Y2 - Neuroticism*0.1
+
+Education <- factor(Education, levels = c("0","1","2"), labels = c("Low","Medium","High"))
+
+```
+##Q3
+
+```{r}
+data <- tibble
+```
+
 
 
 
